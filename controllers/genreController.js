@@ -1,10 +1,26 @@
 const Genre = require("../models/genre");
+const Book = require("../models/book");
+
 const asyncHandler = require("express-async-handler");
 
 // Display list of all Genre.
 exports.genre_list = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Genre list");
+  const allGenres = await Genre.find().sort({ name: 1 }).exec();
+  res.render("genre_list", {
+    title: "Genre List",
+    genre_list: allGenres
+  })
 });
+
+
+exports.author_list = asyncHandler(async (req, res, next) => {
+  const allAuthors = await Author.find().sort({ family_name: 1 }).exec();
+  res.render("author_list", {
+    title: "Author List",
+    author_list: allAuthors,
+  });
+});
+
 
 // Display detail page for a specific Genre.
 exports.genre_detail = asyncHandler(async (req, res, next) => {
