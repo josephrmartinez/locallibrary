@@ -10,7 +10,11 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const catalogRouter = require("./routes/catalog")
 
+require('dotenv').config()
+
 var app = express();
+
+
 
 // Set up rate limiter: maximum of twenty requests per minute
 const RateLimit = require("express-rate-limit");
@@ -24,7 +28,6 @@ app.use(limiter);
 // connect to MongoDB
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
-
 
 const mongoDB = process.env.MONGODB_URI
 
